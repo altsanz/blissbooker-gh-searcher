@@ -9,16 +9,16 @@
   /* @ngInject */
   function dataservice($http, $q, exception, logger) {
     var service = {
-      getPeople: getPeople,
-      getMessageCount: getMessageCount
+      getRepos: getRepos
     };
 
     return service;
 
-    function getMessageCount() { return $q.when(72); }
 
-    function getPeople() {
-      return $http.get('/api/people')
+    function getRepos(query) {
+      return $http.get('https://api.github.com/search/repositories', {
+        q: query
+      })
         .then(success)
         .catch(fail);
 
