@@ -17,7 +17,10 @@
 
     function getRepos(query) {
       return $http.get('https://api.github.com/search/repositories', {
-        q: query
+        params: {
+          q: query,
+          per_page: 10
+        }
       })
         .then(success)
         .catch(fail);
