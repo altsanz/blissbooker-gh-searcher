@@ -5,12 +5,15 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
+
   DashboardController.$inject = ['$q', 'dataservice', 'logger'];
   /* @ngInject */
   function DashboardController($q, dataservice, logger) {
     var vm = this;
 
     vm.getRepos = getRepos;
+
+    vm.repoList = [];
     
     activate();
 
@@ -23,7 +26,7 @@
 
     function getRepos(query) {
       return dataservice.getRepos(query).then(function(data) {
-        vm.repoList = data;
+        vm.repoList = vm.repoList.concat(data.items);
         return vm.repoList;
       });
     }
