@@ -4,10 +4,100 @@
 @screen-md: 992px;
 @screen-lg: 1200px;
 
+@card-padding: 10px;
+
+
+.search-input {
+    font-size: 3rem;
+    padding: 0 5px;
+    width: 100%;
+}
+@media (min-width: @screen-md){
+    .search-input {
+        font-size: 7rem;
+        padding: 0 21px;
+    }
+}
+
+.repo-card {
+    position: relative;
+    background-clip: content-box;
+    background-color: #eee;
+    margin: 15px 0;
+    text-align: center;
+    & > div {
+        padding: @card-padding;
+    }
+
+    h2 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        &.muted {
+            font-size: 1.5rem;
+            font-family: serif;
+            color: #777;
+            font-style: italic;
+            margin-top: -5px;
+        }
+    }
+
+    .description {
+       overflow: hidden;
+       text-overflow: ellipsis;
+       display: -webkit-box;
+       -webkit-box-orient: vertical;
+       -webkit-line-clamp: 3; /* number of lines to show */
+       line-height: 20px;        /* fallback */
+       max-height: 20px*3;       /* fallback */
+    }
+    
+}
+
+@media (min-width: @screen-sm) {
+    .repo-card {
+        min-height: 300px;
+    }
+}
+
+
+
+.placeholder-card {
+    font-family: Norican;
+    font-size: 6rem;
+    color: #bbb;
+    text-align: right;
+}
+
+
+
 @media (min-width: @screen-lg){
     .search-input {
         font-size: 7rem;
-        width: 100%;
     }
+
+    .repo-card:hover {
+        background-color: #ddd
+    }
+    
+
+
+    .input-wrapper {
+        position: absolute;
+        left: 50%;
+        .input-group {
+        left: -50%;
+        position: relative;
+        width: 100%;
+        }
+    }
+    
 }
+
+.owner-avatar, .owner-name {
+    display: inline-block;
+}
+
+
 

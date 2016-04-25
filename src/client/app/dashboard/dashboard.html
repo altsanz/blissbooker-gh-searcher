@@ -1,28 +1,46 @@
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
         <input class="search-input" ng-model="vm.query" ng-model-options="{ debounce: 2000 }" placeholder="Search for a Github repo..." ng-change="vm.getRepos(vm.query, 20, 1)"></input>
         <!-- <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> -->
-      </div>
     </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-
-        <div class="col-md-4" ng-repeat="repo in vm.repoList track by $index">
-          <h2>{{ repo.name }}</h2>
-          <p>{{ repo.description }}</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+    <div class="placeholder-card col-md-12" ng-if="vm.repoList.length === 0 && !vm.loading">
+      ... just type in and voila!
+    </div>
+        <div ng-repeat="repo in vm.repoList track by $index">
+          <div class="clearfix" ng-if="$index % 3 == 0"></div>
+            <div class="col-sm-4 repo-card">
+              <div>
+                <h2>{{ repo.name }}</h2>
+                <h2 class="muted" ng-if="repo.stargazers_count > 1"> Starred {{ repo.stargazers_count }} times</h2>
+                <h2 class="muted" ng-if="repo.stargazers_count == 1"> Starred {{ repo.stargazers_count }} time</h2>
+                <h2 class="muted" ng-if="repo.stargazers_count == 0"> No starred yet! :(</h2>
+                <p class="description">{{ repo.description }}</p>
+                <div class="user-info">
+                    <img class="owner-avatar" height="30" ng-src="{{ repo.owner.avatar_url }}"></img>
+                    <p class="owner-name">{{ repo.owner.login}}</p>
+                </div>
+                <div class="input-wrapper">
+                <div class="input-group">
+                  <input type="text" id="cloneUrl{{ $index }}" class="form-control" ng-model="repo.clone_url" ng-readonly="true">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ngclipboard data-clipboard-target="#cloneUrl{{ $index }}"><span class="glyphicon glyphicon-pushpin"></span></button>
+                  </span>
+                </div>
+                </div>
+              </div>
+          </div>
         </div>
-      </div>
-      <div class="row" ng-if="vm.repoList.length > 0">
-        <p class="col-md-offset-4 col-md-4"><button class="btn btn-primary btn-lg btn-block" role="button" ng-click="vm.getMoreRepos()">Get more results &raquo;</button></p>
-      </div> 
-      <hr>
-
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
-    </div> <!-- /container -->
+    </div>
+    <div class="row" ng-if="vm.repoList.length > 0">
+        <p class="col-md-offset-4 col-md-4">
+            <button class="btn btn-primary btn-lg btn-block" role="button" ng-click="vm.getMoreRepos()">Get more results &raquo;</button>
+        </p>
+    </div>
+</div>
+<!-- /container -->
