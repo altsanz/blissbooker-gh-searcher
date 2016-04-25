@@ -9,22 +9,29 @@
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
+    <div class="placeholder-card col-md-12" ng-if="vm.repoList.length === 0 && !vm.loading">
+      ... just type in and voila!
+    </div>
         <div ng-repeat="repo in vm.repoList track by $index">
           <div class="clearfix" ng-if="$index % 3 == 0"></div>
-            <div class="col-md-4 repo-card">
+            <div class="col-sm-4 repo-card">
               <div>
                 <h2>{{ repo.name }}</h2>
-                <p>{{ repo.description }}</p>
+                <h2 class="muted" ng-if="repo.stargazers_count > 1"> Starred {{ repo.stargazers_count }} times</h2>
+                <h2 class="muted" ng-if="repo.stargazers_count == 1"> Starred {{ repo.stargazers_count }} time</h2>
+                <h2 class="muted" ng-if="repo.stargazers_count == 0"> No starred yet! :(</h2>
+                <p class="description">{{ repo.description }}</p>
                 <div class="user-info">
                     <img class="owner-avatar" height="30" ng-src="{{ repo.owner.avatar_url }}"></img>
                     <p class="owner-name">{{ repo.owner.login}}</p>
                 </div>
-                <p>*: {{ repo.stargazers_count }}</p>
+                <div class="input-wrapper">
                 <div class="input-group">
                   <input type="text" id="cloneUrl{{ $index }}" class="form-control" ng-model="repo.clone_url" ng-readonly="true">
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ngclipboard data-clipboard-target="#cloneUrl{{ $index }}"><span class="glyphicon glyphicon-pushpin"></span></button>
                   </span>
+                </div>
                 </div>
               </div>
           </div>
@@ -35,9 +42,5 @@
             <button class="btn btn-primary btn-lg btn-block" role="button" ng-click="vm.getMoreRepos()">Get more results &raquo;</button>
         </p>
     </div>
-    <hr>
-    <footer>
-        <p>&copy; Company 2015</p>
-    </footer>
 </div>
 <!-- /container -->

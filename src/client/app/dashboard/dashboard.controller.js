@@ -44,6 +44,7 @@
      */
     function getReposNewQuery(query) {
       // @TODO check for empty query
+      vm.repoList = [];
       
       return dataservice.getRepos(query, vm.nextPage, reposPerPage*pagesFirstTime).then(function(data) {
         console.log(data.items);
