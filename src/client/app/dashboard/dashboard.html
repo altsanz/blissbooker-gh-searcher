@@ -1,7 +1,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <input class="search-input" ng-model="vm.query" ng-model-options="{ debounce: 2000 }" placeholder="Search for a Github repo..." ng-change="vm.getRepos(vm.query)"></input>
+        <input class="search-input" ng-model="vm.query" ng-model-options="{ debounce: 2000 }" placeholder="Search for a Github repo..." ng-change="vm.getRepos(vm.query, 20, 1)"></input>
         <!-- <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> -->
       </div>
@@ -11,14 +11,14 @@
       <!-- Example row of columns -->
       <div class="row">
 
-        <div class="col-md-4" ng-repeat="repo in vm.repoList">
+        <div class="col-md-4" ng-repeat="repo in vm.repoList track by $index">
           <h2>{{ repo.name }}</h2>
           <p>{{ repo.description }}</p>
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
       <div class="row" ng-if="vm.repoList.length > 0">
-        <p class="col-md-offset-4 col-md-4"><button class="btn btn-primary btn-lg btn-block" role="button">Get more results &raquo;</button></p>
+        <p class="col-md-offset-4 col-md-4"><button class="btn btn-primary btn-lg btn-block" role="button" ng-click="vm.getMoreRepos()">Get more results &raquo;</button></p>
       </div> 
       <hr>
 

@@ -14,14 +14,20 @@
 
     function catcher(message) {
       return function(e) {
-        var thrownDescription;
-        var newMessage;
-        if (e.data && e.data.description) {
-          thrownDescription = '\n' + e.data.description;
-          newMessage = message + thrownDescription;
+        if(typeof e.status !== 'undefined') {
+          if(e.status === 403) {
+            logger.error('Rate limit to GH api exceeded. Please, try after some seconds');
+          }
+        } else {
+          var thrownDescription;
+          var newMessage;
+          if (e.data && e.data.description) {
+            thrownDescription = '\n' + e.data.description;
+            newMessage = message + thrownDescription;
+          }
+          e.data.description = newMessage;
+          logger.error(newMessage);
         }
-        e.data.description = newMessage;
-        logger.error(newMessage);
         return $q.reject(e);
       };
     }

@@ -5,21 +5,25 @@
     .module('app.core')
     .factory('dataservice', dataservice);
 
-  dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
+  dataservice.$inject = ['$http', '$q', 'exception', 'logger', 'reposPerPage'];
   /* @ngInject */
-  function dataservice($http, $q, exception, logger) {
+  function dataservice($http, $q, exception, logger, reposPerPage) {
     var service = {
       getRepos: getRepos
     };
 
+
     return service;
 
 
-    function getRepos(query) {
+    function getRepos(query, page, qty) {
+      qty = typeof qty !== 'undefined' ? qty : reposPerPage;
+      page = typeof page !== 'undefined' ? page : 0;
       return $http.get('https://api.github.com/search/repositories', {
         params: {
           q: query,
-          per_page: 10
+          page: page,
+          per_page: qty
         }
       })
         .then(success)
