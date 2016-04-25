@@ -14,7 +14,7 @@
     vm.getRepos = getRepos;
 
     vm.repoList = [];
-    
+
     activate();
 
     function activate() {
@@ -25,6 +25,7 @@
     }
 
     function getRepos(query) {
+      // @TODO check for empty query
       return dataservice.getRepos(query).then(function(data) {
         vm.repoList = vm.repoList.concat(data.items);
         return vm.repoList;
