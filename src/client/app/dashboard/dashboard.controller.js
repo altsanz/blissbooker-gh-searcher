@@ -33,21 +33,24 @@
      * Get list of repositories from new query
      */
     function getReposNewQuery(query) {
-      // @TODO check for empty query
       vm.repoList = [];
-      vm.loading = true;
-      return dataservice.getRepos(query, vm.nextPage, reposPerPage*pagesFirstTime).then(function(data) {
-        console.log(data.items);
-        vm.nextPage += pagesFirstTime;  
+      if(query !== '') {
+        vm.loading = true;
+        return dataservice.getRepos(query, vm.nextPage, reposPerPage*pagesFirstTime).then(function(data) {
+          console.log(data.items);
+          vm.nextPage += pagesFirstTime;  
 
-        vm.repoList = data.items.slice(0, reposPerPage);
-        vm.cachedNextPage = data.items.slice(reposPerPage, data.items.length);
-        vm.loading = false;
-        return vm.repoList;
-      });
+          vm.repoList = data.items.slice(0, reposPerPage);
+          vm.cachedNextPage = data.items.slice(reposPerPage, data.items.length);
+          vm.loading = false;
+          return vm.repoList;
+        });
+      }
     }
 
-
+    /**
+    * Method that loads cached page and retrieves next 10 items
+    */
     function getMoreRepos() {
       
       vm.repoList = vm.repoList.concat(vm.cachedNextPage);
