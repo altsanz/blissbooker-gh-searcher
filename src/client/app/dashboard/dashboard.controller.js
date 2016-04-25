@@ -27,6 +27,7 @@
     vm.cachedNextPage = [];
 
 
+
     activate();
 
     
@@ -58,14 +59,17 @@
     function getMoreRepos() {
       
       vm.repoList = vm.repoList.concat(vm.cachedNextPage);
+      
       vm.cachedNextPage = [];
+
         return dataservice.getRepos(vm.query, vm.nextPage, reposPerPage).then(function(data) {
           vm.cachedNextPage = data.items;
           vm.nextPage += 1;
           return vm.repoList;
         }, function(error) {
-          debugger;
-        });
+
+          // Do query to github /rate_limit to see when it's reseted
+          });
     }
 
   }
