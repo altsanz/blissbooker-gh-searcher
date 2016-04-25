@@ -9,20 +9,25 @@
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-4" ng-repeat="repo in vm.repoList track by $index">
-            <h2>{{ repo.name }}</h2>
-            <p>{{ repo.description }}</p>
-            <div class="user-info">
-                <img class="owner-avatar" height="30" ng-src="{{ repo.owner.avatar_url }}"></img>
-                <p class="owner-name">{{ repo.owner.login}}</p>
-            </div>
-            <p>*: {{ repo.stargazers_count }}</p>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="repo.clone_url" ng-readonly="true">
-                <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-            </div>
+        <div ng-repeat="repo in vm.repoList track by $index">
+          <div class="clearfix" ng-if="$index % 3 == 0"></div>
+            <div class="col-md-4 repo-card">
+              <div>
+                <h2>{{ repo.name }}</h2>
+                <p>{{ repo.description }}</p>
+                <div class="user-info">
+                    <img class="owner-avatar" height="30" ng-src="{{ repo.owner.avatar_url }}"></img>
+                    <p class="owner-name">{{ repo.owner.login}}</p>
+                </div>
+                <p>*: {{ repo.stargazers_count }}</p>
+                <div class="input-group">
+                  <input type="text" id="cloneUrl{{ $index }}" class="form-control" ng-model="repo.clone_url" ng-readonly="true">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ngclipboard data-clipboard-target="#cloneUrl{{ $index }}"><span class="glyphicon glyphicon-pushpin"></span></button>
+                  </span>
+                </div>
+              </div>
+          </div>
         </div>
     </div>
     <div class="row" ng-if="vm.repoList.length > 0">
