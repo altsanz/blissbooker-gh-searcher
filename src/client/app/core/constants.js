@@ -5,5 +5,8 @@
   angular
     .module('app.core')
     .constant('toastr', toastr)
-    .constant('moment', moment);
+    .constant('moment', moment)
+    .constant('reposPerPage', 10)
+    .constant('pagesFirstTime', 2)
+    .constant('ghApiFirstPage', 1);
 })();
