@@ -15,6 +15,7 @@
     vm.getRepos = getReposNewQuery;
 
     vm.getMoreRepos = getMoreRepos;
+    
     vm.repoList = [];
 
     vm.query = '';
@@ -28,6 +29,11 @@
 
     vm.loading = false;
 
+    vm.copySuccess = copySuccess;
+
+    vm.copyError = copyError;
+
+    //////////////////
 
     /**
      * Get list of repositories from new query
@@ -63,6 +69,14 @@
         }, function(error) {
           // Do query to github /rate_limit to see when it's reseted
           });
+    }
+
+    function copySuccess(e) {
+      logger.success('Copied!');
+    }
+
+    function copyError(e) {
+      logger.error('We couldn\'t make it! :(');
     }
 
   }

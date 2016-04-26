@@ -47,7 +47,7 @@
                 <div class="input-group">
                   <input type="text" id="cloneUrl{{ $index }}" class="form-control" ng-model="repo.clone_url" ng-readonly="true">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ngclipboard data-clipboard-target="#cloneUrl{{ $index }}"><span class="glyphicon glyphicon-pushpin"></span></button>
+                    <button class="btn btn-default" type="button" ngclipboard data-clipboard-target="#cloneUrl{{ $index }}" ngclipboard-success="vm.copySuccess(e)" ngclipboard-error="vm.copyError(e)"><span class="glyphicon glyphicon-pushpin"></span></button>
                   </span>
                 </div>
                 </div>
