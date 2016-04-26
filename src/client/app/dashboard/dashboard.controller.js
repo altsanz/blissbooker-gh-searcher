@@ -15,7 +15,7 @@
     vm.getRepos = getReposNewQuery;
 
     vm.getMoreRepos = getMoreRepos;
-    
+
     vm.repoList = [];
 
     vm.query = '';
@@ -43,7 +43,6 @@
       if(query !== '') {
         vm.loading = true;
         return dataservice.getRepos(query, vm.nextPage, reposPerPage*pagesFirstTime).then(function(data) {
-          console.log(data.items);
           vm.nextPage += pagesFirstTime;  
 
           vm.repoList = data.items.slice(0, reposPerPage);

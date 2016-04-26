@@ -3,18 +3,16 @@
 
   angular
     .module('app.core')
-    .factory('dataservice', dataservice);
+    .factory('dataservice', Dataservice);
 
-  dataservice.$inject = ['$http', '$q', 'exception', 'logger', 'reposPerPage'];
+  Dataservice.$inject = ['$http', '$q', 'exception', 'logger', 'reposPerPage'];
   /* @ngInject */
-  function dataservice($http, $q, exception, logger, reposPerPage) {
+  function Dataservice($http, $q, exception, logger, reposPerPage) {
     var service = {
       getRepos: getRepos
     };
 
-
     return service;
-
 
     function getRepos(query, page, qty) {
       qty = typeof qty !== 'undefined' ? qty : reposPerPage;
@@ -23,11 +21,11 @@
         params: {
           q: query,
           page: page,
-          per_page: qty
+          per_page: qty // jshint ignore:line
         }
       })
-        .then(success)
-        .catch(fail);
+      .then(success, fail);
+        
 
       function success(response) {
         return response.data;
