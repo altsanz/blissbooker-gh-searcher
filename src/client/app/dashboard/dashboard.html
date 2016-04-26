@@ -34,7 +34,7 @@
           <div class="clearfix" ng-if="$index % 3 == 0"></div>
             <div class="col-sm-4 repo-card">
               <div>
-                <h2>{{ repo.name }}</h2>
+                <h2><a ng-href="{{ repo.html_url }}">{{ repo.name }}</a></h2>
                 <h2 class="muted" ng-if="repo.stargazers_count > 1"> Starred {{ repo.stargazers_count }} times</h2>
                 <h2 class="muted" ng-if="repo.stargazers_count == 1"> Starred {{ repo.stargazers_count }} time</h2>
                 <h2 class="muted" ng-if="repo.stargazers_count == 0"> No starred yet! :(</h2>
